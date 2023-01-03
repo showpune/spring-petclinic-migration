@@ -1,0 +1,1 @@
+./mvnw org.openrewrite.maven:rewrite-maven-plugin:run -Drewrite.activeRecipes=com.azure.spring.migration.UpgradeToAzureSpringApps -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-spring:4.31.0

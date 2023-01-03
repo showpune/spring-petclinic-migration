@@ -1,0 +1,16 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.azure.spring.migration.UpgradeToAzureSpringApps
+displayName: Migrate to Spring Apps
+description: Migrate to Spring Apps
+recipeList:
+  - org.openrewrite.java.spring.boot2.UpgradeSpringBoot_2_7
+  - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0
+  - org.openrewrite.java.search.FindLiterals:
+      pattern: "[A-z]:([\\\\][^\\n\\t]+)+|(\\\\\\\\([^\\\\\\,\\n\\t]+)\\\\\\S+)+"
+  - org.openrewrite.xml.ChangeTagAttribute:
+      elementName: "appender"
+      attributeName: class
+      newValue: ch.qos.logback.core.ConsoleAppender
+      oldValue: ch.qos.logback.core.rolling.RollingFileAppender
+      fileMatcher: '**/log*.xml'
+
