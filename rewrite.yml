@@ -15,4 +15,3 @@ recipeList:
       newValue: ch.qos.logback.core.ConsoleAppender
       oldValue: ch.qos.logback.core.rolling.RollingFileAppender
       fileMatcher: '**/log*.xml'
-
