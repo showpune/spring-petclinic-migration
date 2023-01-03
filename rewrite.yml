@@ -7,6 +7,8 @@ recipeList:
   - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0
   - org.openrewrite.java.search.FindLiterals:
       pattern: "[A-z]:([\\\\][^\\n\\t]+)+|(\\\\\\\\([^\\\\\\,\\n\\t]+)\\\\\\S+)+"
+  - org.openrewrite.FindSourceFiles:
+      filePattern: "*.dll"
   - org.openrewrite.xml.ChangeTagAttribute:
       elementName: "appender"
       attributeName: class
