@@ -121,12 +121,21 @@
       <version>${webjars-bootstrap.version}</version>
     </dependency>
     <!-- end of webjars -->
-
+      <dependency>
+          <groupId>org.openrewrite.recipe</groupId>
+          <artifactId>rewrite-spring</artifactId>
+          <version>4.31.0</version>
+      </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
     </dependency>
+      <dependency>
+          <groupId>org.openrewrite.recipe</groupId>
+          <artifactId>rewrite-spring</artifactId>
+          <version>4.31.0</version>
+      </dependency>
   </dependencies>
 
   <build>
@@ -152,7 +161,23 @@
           </execution>
         </executions>
       </plugin>
-
+        <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>4.38.1</version>
+            <configuration>
+                <activeRecipes>
+                    <recipe>com.azure.spring.migration.UpgradeToAzureSpringApps</recipe>
+                </activeRecipes>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openrewrite.recipe</groupId>
+                    <artifactId>rewrite-spring</artifactId>
+                    <version>4.31.0</version>
+                </dependency>
+            </dependencies>
+        </plugin>
 
     </plugins>
   </build>
