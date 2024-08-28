@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MessageController {
 
+	@Autowired
 	private final AmqpTemplate amqpTemplate;
 
-	@Autowired
 	public MessageController(AmqpTemplate amqpTemplate) {
 		this.amqpTemplate = amqpTemplate;
 	}
