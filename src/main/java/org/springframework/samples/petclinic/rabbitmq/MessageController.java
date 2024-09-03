@@ -20,20 +20,20 @@ public class MessageController {
 
 	@GetMapping("/sendMessage")
 	public String sendMessage() {
-		String message = "Sample message using amqp template";
-		FlareMessage flareMessage = new FlareMessage();
-		flareMessage.setMessage(message);
-		amqpTemplate.convertAndSend("queue1", "", message);
-		return message;
+		String preparedString = "Sample message using amqp template";
+		FlareMessage flareObject = new FlareMessage();
+		flareObject.setMessage(preparedString);
+		amqpTemplate.convertAndSend("queue1", "", flareObject);
+		return preparedString;
 	}
 
 	@GetMapping("/sendMessage2")
 	public String sendMessage2() {
-		String message = "Sample message2 using amqp template";
-		FlareMessage flareMessage = new FlareMessage();
-		flareMessage.setMessage(message);
-		amqpTemplate.convertAndSend("queue2", "", flareMessage);
-		return message;
+		String preparedString = "Sample message2 using amqp template";
+		FlareMessage flareObject = new FlareMessage();
+		flareObject.setMessage(preparedString);
+		amqpTemplate.convertAndSend("queue2", "", flareObject);
+		return preparedString;
 	}
 
 }
