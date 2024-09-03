@@ -17,7 +17,14 @@ public class MessageListener {
 		if(message == null){
 			throw new AmqpRejectAndDontRequeueException("message is null");
 		}
+	}
 
+	@RabbitListener(queues = "queue.excur")
+	public void receiveMessage2(String message) {
+		System.out.println("Received Message:" + message);
+		if(message == null){
+			throw new AmqpRejectAndDontRequeueException("message is null");
+		}
 	}
 
 }

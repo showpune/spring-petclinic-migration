@@ -20,8 +20,16 @@ public class MessageController {
 
 	@GetMapping("/sendMessage")
 	public String sendMessage() {
-		amqpTemplate.convertAndSend("fanout.ex", "", "Sample message using amqp template");
-		return "Message Sent";
+		String message = "Sample message using amqp template";
+		amqpTemplate.convertAndSend("queue1", "", message);
+		return message;
+	}
+
+	@GetMapping("/sendMessage2")
+	public String sendMessage2() {
+		String message = "Sample message2 using amqp template";
+		amqpTemplate.convertAndSend("queue2", "", message);
+		return message;
 	}
 
 }
