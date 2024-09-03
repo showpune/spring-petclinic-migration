@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.rabbitmq;
 
-import org.apache.catalina.util.StringUtil;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
