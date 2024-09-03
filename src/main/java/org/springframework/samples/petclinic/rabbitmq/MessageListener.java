@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.rabbitmq;
 
+import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,10 @@ public class MessageListener {
 	@RabbitListener(queues = "queue.excur")
 	public void receiveMessage(String message) {
 		System.out.println("Received Message:" + message);
-		System.out.println();
+		if(message == null){
+			throw new AmqpRejectAndDontRequeueException("message is null");
+		}
+
 	}
 
 }
