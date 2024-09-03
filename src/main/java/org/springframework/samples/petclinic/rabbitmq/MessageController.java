@@ -21,6 +21,8 @@ public class MessageController {
 	@GetMapping("/sendMessage")
 	public String sendMessage() {
 		String message = "Sample message using amqp template";
+		FlareMessage flareMessage = new FlareMessage();
+		flareMessage.setMessage(message);
 		amqpTemplate.convertAndSend("queue1", "", message);
 		return message;
 	}
@@ -28,7 +30,9 @@ public class MessageController {
 	@GetMapping("/sendMessage2")
 	public String sendMessage2() {
 		String message = "Sample message2 using amqp template";
-		amqpTemplate.convertAndSend("queue2", "", message);
+		FlareMessage flareMessage = new FlareMessage();
+		flareMessage.setMessage(message);
+		amqpTemplate.convertAndSend("queue2", "", flareMessage);
 		return message;
 	}
 

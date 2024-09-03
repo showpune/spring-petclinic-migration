@@ -11,20 +11,27 @@ public class MessageListener {
 	 * Assigns a Consumer to receive the messages whenever there is one.
 	 * @param message
 	 */
-	@RabbitListener(queues = "queue.excur")
-	public void receiveMessage(String message) {
-		System.out.println("Received Message:" + message);
-		if(message == null){
-			throw new AmqpRejectAndDontRequeueException("message is null");
+	@RabbitListener(queues = "queue1")
+	public void receiveMessage(FlareMessage message) {
+		try{
+			String detailMessage = message.getMessage();
+			handleMessage(detailMessage);		
+		}catch(Exception e){
+			throw new AmqpRejectAndDontRequeueException(e);
 		}
 	}
 
-	@RabbitListener(queues = "queue.excur")
-	public void receiveMessage2(String message) {
-		System.out.println("Received Message:" + message);
+	private void handleMessage(String detailMessage) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'handleMessage'");
+	}
+
+	@RabbitListener(queues = "queue2")
+	public void receiveMessage2(FlareMessage message) {
 		if(message == null){
 			throw new AmqpRejectAndDontRequeueException("message is null");
 		}
+		System.out.println("Received Message2:" + message.getMessage());
 	}
 
 }
