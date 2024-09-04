@@ -11,7 +11,7 @@ public class MessageListener {
 	 * Assigns a Consumer to receive the messages whenever there is one.
 	 * @param message
 	 */
-	@RabbitListener(queues = "queue1")
+	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage(FlareMessage message) {
 		try{
 			String detailMessage = message.getMessage();
@@ -26,7 +26,7 @@ public class MessageListener {
 		throw new UnsupportedOperationException("Unimplemented method 'handleMessage'");
 	}
 
-	@RabbitListener(queues = "queue2")
+	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage2(FlareMessage message) {
 		if(message == null){
 			throw new AmqpRejectAndDontRequeueException("message is null");

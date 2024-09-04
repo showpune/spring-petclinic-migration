@@ -12,7 +12,7 @@ public class SecondListener {
 	 * Assigns a Consumer to receive the messages whenever there is one.
 	 * @param message
 	 */
-	@RabbitListener(queues = "queue2")
+	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage(FlareMessage message) {
 		try{
 			String detailMessage = message.getMessage();
