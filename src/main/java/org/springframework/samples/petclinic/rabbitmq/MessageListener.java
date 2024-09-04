@@ -22,7 +22,6 @@ public class MessageListener {
 	}
 
 	private void handleMessage(String detailMessage) {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'handleMessage'");
 	}
 
