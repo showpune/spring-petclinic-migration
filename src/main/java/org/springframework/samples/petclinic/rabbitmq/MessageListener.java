@@ -28,7 +28,7 @@ public class MessageListener {
 	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage2(FlareMessage message) {
 		if(message == null){
-			throw new AmqpRejectAndDontRequeueException("message is null");
+			throw new AmqpRejectAndDontRequeueException(new Exception("message is null"));
 		}
 		System.out.println("Received Message2:" + message.getMessage());
 	}
