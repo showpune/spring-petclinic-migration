@@ -1,10 +1,13 @@
 package org.springframework.samples.petclinic.rabbitmq;
 
-import org.springframework.amqp.AmqpRejectAndDontRequeueException;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import com.azure.spring.messaging.servicebus.implementation.core.annotation.ServiceBusListener;
+import com.azure.messaging.servicebus.ServiceBusErrorSource;
+import com.azure.messaging.servicebus.ServiceBusException;
+import com.azure.spring.messaging.implementation.annotation.EnableAzureMessaging;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+@EnableAzureMessaging
 @Service
 public class SecondListener {
 
@@ -12,13 +15,13 @@ public class SecondListener {
 	 * Assigns a Consumer to receive the messages whenever there is one.
 	 * @param message
 	 */
-	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
+	@ServiceBusListener(destination = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage(FlareMessage message) {
 		try{
 			String detailMessage = message.getMessage();
-			handleMessage(detailMessage);		
+			handleMessage(detailMessage);
 		}catch(Exception e){
-			throw new AmqpRejectAndDontRequeueException(e);
+			throw new ServiceBusException(e,ServiceBusErrorSource.ABANDON);
 		}
 	}
 
