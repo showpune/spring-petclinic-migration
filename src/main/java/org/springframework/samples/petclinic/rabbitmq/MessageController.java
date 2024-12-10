@@ -1,11 +1,12 @@
 package org.springframework.samples.petclinic.rabbitmq;
 
-import org.springframework.amqp.core.AmqpTemplate;
+import com.azure.spring.messaging.servicebus.core.ServiceBusTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 /**
  * Spring controller exposes api for Home controller.
  */
@@ -13,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
 	@Autowired
-	private final AmqpTemplate amqpTemplate;
+	private final ServiceBusTemplate serviceBusTemplate;
 
-	public MessageController(AmqpTemplate amqpTemplate) {
-		this.amqpTemplate = amqpTemplate;
+	public MessageController(ServiceBusTemplate serviceBusTemplate) {
+		this.serviceBusTemplate = serviceBusTemplate;
 	}
 
 	@Value("${rabitMq.dcs.queue.name}")
@@ -27,7 +28,11 @@ public class MessageController {
 		String preparedString = "Sample message using amqp template";
 		FlareMessage flareObject = new FlareMessage();
 		flareObject.setMessage(preparedString);
-		amqpTemplate.convertAndSend(DCSQueue, "", flareObject);
+		Message<FlareMessage> message = MessageBuilder.withPayload(flareObject)
+                .setHeader("customHeader", "headerValue")
+                .setHeader("contentType", "application/json")
+                .build();
+		serviceBusTemplate.send(DCSQueue, message);
 		return preparedString;
 	}
 
@@ -36,7 +41,11 @@ public class MessageController {
 		String preparedString = "Sample message2 using amqp template";
 		FlareMessage flareObject = new FlareMessage();
 		flareObject.setMessage(preparedString);
-		amqpTemplate.convertAndSend(DCSQueue, "", flareObject);
+		Message<FlareMessage> message = MessageBuilder.withPayload(flareObject)
+                .setHeader("customHeader", "headerValue")
+                .setHeader("contentType", "application/json")
+                .build();
+		serviceBusTemplate.send(DCSQueue, message);
 		return preparedString;
 	}
 

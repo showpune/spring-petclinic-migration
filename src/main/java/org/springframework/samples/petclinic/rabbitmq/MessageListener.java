@@ -1,9 +1,12 @@
 package org.springframework.samples.petclinic.rabbitmq;
 
-import org.springframework.amqp.AmqpRejectAndDontRequeueException;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import com.azure.spring.messaging.servicebus.implementation.core.annotation.ServiceBusListener;
+import com.azure.messaging.servicebus.ServiceBusErrorSource;
+import com.azure.messaging.servicebus.ServiceBusException;
+import com.azure.spring.messaging.implementation.annotation.EnableAzureMessaging;
 import org.springframework.stereotype.Service;
 
+@EnableAzureMessaging
 @Service
 public class MessageListener {
 
@@ -11,13 +14,13 @@ public class MessageListener {
 	 * Assigns a Consumer to receive the messages whenever there is one.
 	 * @param message
 	 */
-	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
+	@ServiceBusListener(destination = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage(FlareMessage message) {
 		try{
 			String detailMessage = message.getMessage();
-			handleMessage(detailMessage);		
+			handleMessage(detailMessage);
 		}catch(Exception e){
-			throw new AmqpRejectAndDontRequeueException(e);
+			throw new ServiceBusException(e,ServiceBusErrorSource.ABANDON);
 		}
 	}
 
@@ -25,10 +28,10 @@ public class MessageListener {
 		throw new UnsupportedOperationException("Unimplemented method 'handleMessage'");
 	}
 
-	@RabbitListener(queues = "${rabitMq.dcs.queue.name}")
+	@ServiceBusListener(destination = "${rabitMq.dcs.queue.name}")
 	public void receiveMessage2(FlareMessage message) {
 		if(message == null){
-			throw new AmqpRejectAndDontRequeueException(new Exception("message is null"));
+			throw new ServiceBusException(new Exception("message is null"),ServiceBusErrorSource.ABANDON);
 		}
 		System.out.println("Received Message2:" + message.getMessage());
 	}
