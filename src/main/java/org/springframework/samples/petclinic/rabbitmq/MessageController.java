@@ -41,8 +41,6 @@ public class MessageController {
 		String preparedString = "Sample message2 using amqp template";
 		FlareMessage flareObject = new FlareMessage();
 		flareObject.setMessage(preparedString);
-		//TODO: Need manual change. Azure Service Bus with Spring Messaging doesn't support exchange, routing key, and queue definition in the same way as RabbitMQ. Please refer to the Azure Service Bus documentation to directly send messages to the queue with queue name.
-		//amqpTemplate.convertAndSend(DCSQueue, "", flareObject);
 		Message<FlareMessage> message = MessageBuilder.withPayload(flareObject)
                 .setHeader("customHeader", "headerValue")
                 .setHeader("contentType", "application/json")
