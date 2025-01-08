@@ -6,8 +6,8 @@
     - java.referenced:
         pattern: org.springframework.amqp.*
     - java.referenced:
-        pattern: '*AmqpTemplate*'
+        pattern: 'AmqpTemplate'
     - java.referenced:
-        pattern: '*AmqpTemplate.convertAndSend'
+        pattern: 'AmqpTemplate.convertAndSend'
     - java.referenced:
-        pattern: '*RabbitListener'
+        pattern: 'RabbitListener'

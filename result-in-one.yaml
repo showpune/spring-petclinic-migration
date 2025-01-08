@@ -1,0 +1,106 @@
+- name: konveyor-analysis
+  violations:
+    code-location:
+      description: ""
+      category: potential
+      incidents:
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+        message: code location
+        codeSnip: " 1  package org.springframework.samples.petclinic.rabbitmq;\n 2  \n 3  import org.springframework.amqp.core.AmqpTemplate;\n 4  import org.springframework.beans.factory.annotation.Autowired;\n 5  import org.springframework.beans.factory.annotation.Value;\n 6  import org.springframework.web.bind.annotation.GetMapping;\n 7  import org.springframework.web.bind.annotation.RestController;\n 8  \n 9  /**\n10   * Spring controller exposes api for Home controller.\n11   */\n12  @RestController\n13  public class MessageController {"
+        lineNumber: 3
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+          kind: Module
+          name: org.springframework.amqp.core.AmqpTemplate
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+        message: code location
+        codeSnip: " 6  import org.springframework.web.bind.annotation.GetMapping;\n 7  import org.springframework.web.bind.annotation.RestController;\n 8  \n 9  /**\n10   * Spring controller exposes api for Home controller.\n11   */\n12  @RestController\n13  public class MessageController {\n14  \n15  \t@Autowired\n16  \tprivate final AmqpTemplate amqpTemplate;\n17  \n18  \tpublic MessageController(AmqpTemplate amqpTemplate) {\n19  \t\tthis.amqpTemplate = amqpTemplate;\n20  \t}\n21  \n22  \t@Value(\"${rabitMq.dcs.queue.name}\")\n23      private String DCSQueue;\n24  \n25  \t@GetMapping(\"/sendMessage\")\n26  \tpublic String sendMessage() {"
+        lineNumber: 16
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+          kind: Field
+          name: amqpTemplate
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+        message: code location
+        codeSnip: " 8  \n 9  /**\n10   * Spring controller exposes api for Home controller.\n11   */\n12  @RestController\n13  public class MessageController {\n14  \n15  \t@Autowired\n16  \tprivate final AmqpTemplate amqpTemplate;\n17  \n18  \tpublic MessageController(AmqpTemplate amqpTemplate) {\n19  \t\tthis.amqpTemplate = amqpTemplate;\n20  \t}\n21  \n22  \t@Value(\"${rabitMq.dcs.queue.name}\")\n23      private String DCSQueue;\n24  \n25  \t@GetMapping(\"/sendMessage\")\n26  \tpublic String sendMessage() {\n27  \t\tString preparedString = \"Sample message using amqp template\";\n28  \t\tFlareMessage flareObject = new FlareMessage();"
+        lineNumber: 18
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+          kind: Constructor
+          name: MessageController
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+        message: code location
+        codeSnip: " 1  package org.springframework.samples.petclinic.rabbitmq;\n 2  \n 3  import org.springframework.amqp.AmqpRejectAndDontRequeueException;\n 4  import org.springframework.amqp.rabbit.annotation.RabbitListener;\n 5  import org.springframework.stereotype.Service;\n 6  \n 7  @Service\n 8  public class MessageListener {\n 9  \n10  \t/**\n11  \t * Assigns a Consumer to receive the messages whenever there is one.\n12  \t * @param message\n13  \t */\n14  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")"
+        lineNumber: 4
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+          kind: Module
+          name: org.springframework.amqp.rabbit.annotation.RabbitListener
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+        message: code location
+        codeSnip: " 4  import org.springframework.amqp.rabbit.annotation.RabbitListener;\n 5  import org.springframework.stereotype.Service;\n 6  \n 7  @Service\n 8  public class MessageListener {\n 9  \n10  \t/**\n11  \t * Assigns a Consumer to receive the messages whenever there is one.\n12  \t * @param message\n13  \t */\n14  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n15  \tpublic void receiveMessage(FlareMessage message) {\n16  \t\ttry{\n17  \t\t\tString detailMessage = message.getMessage();\n18  \t\t\thandleMessage(detailMessage);\t\t\n19  \t\t}catch(Exception e){\n20  \t\t\tthrow new AmqpRejectAndDontRequeueException(e);\n21  \t\t}\n22  \t}\n23  \n24  \tprivate void handleMessage(String detailMessage) {"
+        lineNumber: 14
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+          kind: Method
+          name: receiveMessage
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+        message: code location
+        codeSnip: "10  \t/**\n11  \t * Assigns a Consumer to receive the messages whenever there is one.\n12  \t * @param message\n13  \t */\n14  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n15  \tpublic void receiveMessage(FlareMessage message) {\n16  \t\ttry{\n17  \t\t\tString detailMessage = message.getMessage();\n18  \t\t\thandleMessage(detailMessage);\t\t\n19  \t\t}catch(Exception e){\n20  \t\t\tthrow new AmqpRejectAndDontRequeueException(e);\n21  \t\t}\n22  \t}\n23  \n24  \tprivate void handleMessage(String detailMessage) {\n25  \t\tthrow new UnsupportedOperationException(\"Unimplemented method 'handleMessage'\");\n26  \t}\n27  \n28  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n29  \tpublic void receiveMessage2(FlareMessage message) {\n30  \t\tif(message == null){"
+        lineNumber: 20
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+          kind: Constructor
+          name: receiveMessage
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+        message: code location
+        codeSnip: "18  \t\t\thandleMessage(detailMessage);\t\t\n19  \t\t}catch(Exception e){\n20  \t\t\tthrow new AmqpRejectAndDontRequeueException(e);\n21  \t\t}\n22  \t}\n23  \n24  \tprivate void handleMessage(String detailMessage) {\n25  \t\tthrow new UnsupportedOperationException(\"Unimplemented method 'handleMessage'\");\n26  \t}\n27  \n28  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n29  \tpublic void receiveMessage2(FlareMessage message) {\n30  \t\tif(message == null){\n31  \t\t\tthrow new AmqpRejectAndDontRequeueException(new Exception(\"message is null\"));\n32  \t\t}\n33  \t\tSystem.out.println(\"Received Message2:\" + message.getMessage());\n34  \t}\n35  \n36  }\n"
+        lineNumber: 28
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+          kind: Method
+          name: receiveMessage2
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+        message: code location
+        codeSnip: "21  \t\t}\n22  \t}\n23  \n24  \tprivate void handleMessage(String detailMessage) {\n25  \t\tthrow new UnsupportedOperationException(\"Unimplemented method 'handleMessage'\");\n26  \t}\n27  \n28  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n29  \tpublic void receiveMessage2(FlareMessage message) {\n30  \t\tif(message == null){\n31  \t\t\tthrow new AmqpRejectAndDontRequeueException(new Exception(\"message is null\"));\n32  \t\t}\n33  \t\tSystem.out.println(\"Received Message2:\" + message.getMessage());\n34  \t}\n35  \n36  }\n"
+        lineNumber: 31
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
+          kind: Constructor
+          name: receiveMessage2
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/SecondListener.java
+        message: code location
+        codeSnip: " 1  package org.springframework.samples.petclinic.rabbitmq;\n 2  \n 3  import org.springframework.amqp.AmqpRejectAndDontRequeueException;\n 4  import org.springframework.amqp.rabbit.annotation.RabbitListener;\n 5  import org.springframework.stereotype.Service;\n 6  import org.springframework.util.StringUtils;\n 7  \n 8  @Service\n 9  public class SecondListener {\n10  \n11  \t/**\n12  \t * Assigns a Consumer to receive the messages whenever there is one.\n13  \t * @param message\n14  \t */"
+        lineNumber: 4
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/SecondListener.java
+          kind: Module
+          name: org.springframework.amqp.rabbit.annotation.RabbitListener
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/SecondListener.java
+        message: code location
+        codeSnip: " 5  import org.springframework.stereotype.Service;\n 6  import org.springframework.util.StringUtils;\n 7  \n 8  @Service\n 9  public class SecondListener {\n10  \n11  \t/**\n12  \t * Assigns a Consumer to receive the messages whenever there is one.\n13  \t * @param message\n14  \t */\n15  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n16  \tpublic void receiveMessage(FlareMessage message) {\n17  \t\ttry{\n18  \t\t\tString detailMessage = message.getMessage();\n19  \t\t\thandleMessage(detailMessage);\t\t\n20  \t\t}catch(Exception e){\n21  \t\t\tthrow new AmqpRejectAndDontRequeueException(e);\n22  \t\t}\n23  \t}\n24  \n25  \tprivate void handleMessage(String detailMessage) throws Exception {"
+        lineNumber: 15
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/SecondListener.java
+          kind: Method
+          name: receiveMessage
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/SecondListener.java
+        message: code location
+        codeSnip: "11  \t/**\n12  \t * Assigns a Consumer to receive the messages whenever there is one.\n13  \t * @param message\n14  \t */\n15  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")\n16  \tpublic void receiveMessage(FlareMessage message) {\n17  \t\ttry{\n18  \t\t\tString detailMessage = message.getMessage();\n19  \t\t\thandleMessage(detailMessage);\t\t\n20  \t\t}catch(Exception e){\n21  \t\t\tthrow new AmqpRejectAndDontRequeueException(e);\n22  \t\t}\n23  \t}\n24  \n25  \tprivate void handleMessage(String detailMessage) throws Exception {\n26  \t\tif(!StringUtils.hasLength(detailMessage)){\n27  \t\t\tthrow new Exception(\"message is empty\");\n28  \t\t}else{\n29  \t\t\tSystem.out.print(detailMessage);\n30  \t\t}\n31  \t}"
+        lineNumber: 21
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/SecondListener.java
+          kind: Constructor
+          name: receiveMessage
+          package: org.springframework.samples.petclinic.rabbitmq
+      effort: 1
