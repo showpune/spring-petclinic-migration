@@ -1,0 +1,24 @@
+- message: "long-name java.referenced"
+  ruleID: longname-reference
+  effort: 1
+  when:
+    java.referenced:
+      pattern: org.springframework.amqp.*
+- message: "simple-name referenced"
+  ruleID: simple-reference
+  effort: 1
+  when:
+    java.referenced:
+      pattern: 'AmqpTemplate'
+- message: "method call"
+  ruleID: method-call
+  effort: 1
+  when:
+    java.referenced:
+      pattern: 'AmqpTemplate.convertAndSend'
+- message: "annotation"
+  ruleID: annotation
+  effort: 1
+  when:
+    java.referenced:
+      pattern: 'RabbitListener'
