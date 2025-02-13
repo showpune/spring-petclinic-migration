@@ -31,6 +31,24 @@
           kind: Constructor
           name: MessageController
           package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+        message: code location
+        codeSnip: "20  \t}\n21  \n22  \t@Value(\"${rabitMq.dcs.queue.name}\")\n23      private String DCSQueue;\n24  \n25  \t@GetMapping(\"/sendMessage\")\n26  \tpublic String sendMessage() {\n27  \t\tString preparedString = \"Sample message using amqp template\";\n28  \t\tFlareMessage flareObject = new FlareMessage();\n29  \t\tflareObject.setMessage(preparedString);\n30  \t\tamqpTemplate.convertAndSend(DCSQueue, \"\", flareObject);\n31  \t\treturn preparedString;\n32  \t}\n33  \n34  \t@GetMapping(\"/sendMessage2\")\n35  \tpublic String sendMessage2() {\n36  \t\tString preparedString = \"Sample message2 using amqp template\";\n37  \t\tFlareMessage flareObject = new FlareMessage();\n38  \t\tflareObject.setMessage(preparedString);\n39  \t\tamqpTemplate.convertAndSend(DCSQueue, \"\", flareObject);\n40  \t\treturn preparedString;"
+        lineNumber: 30
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+          kind: Method
+          name: sendMessage
+          package: org.springframework.samples.petclinic.rabbitmq
+      - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+        message: code location
+        codeSnip: "29  \t\tflareObject.setMessage(preparedString);\n30  \t\tamqpTemplate.convertAndSend(DCSQueue, \"\", flareObject);\n31  \t\treturn preparedString;\n32  \t}\n33  \n34  \t@GetMapping(\"/sendMessage2\")\n35  \tpublic String sendMessage2() {\n36  \t\tString preparedString = \"Sample message2 using amqp template\";\n37  \t\tFlareMessage flareObject = new FlareMessage();\n38  \t\tflareObject.setMessage(preparedString);\n39  \t\tamqpTemplate.convertAndSend(DCSQueue, \"\", flareObject);\n40  \t\treturn preparedString;\n41  \t}\n42  \n43  }\n"
+        lineNumber: 39
+        variables:
+          file: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageController.java
+          kind: Method
+          name: sendMessage2
+          package: org.springframework.samples.petclinic.rabbitmq
       - uri: file:///analyzer-lsp/examples/spring-petclinic/src/main/java/org/springframework/samples/petclinic/rabbitmq/MessageListener.java
         message: code location
         codeSnip: " 1  package org.springframework.samples.petclinic.rabbitmq;\n 2  \n 3  import org.springframework.amqp.AmqpRejectAndDontRequeueException;\n 4  import org.springframework.amqp.rabbit.annotation.RabbitListener;\n 5  import org.springframework.stereotype.Service;\n 6  \n 7  @Service\n 8  public class MessageListener {\n 9  \n10  \t/**\n11  \t * Assigns a Consumer to receive the messages whenever there is one.\n12  \t * @param message\n13  \t */\n14  \t@RabbitListener(queues = \"${rabitMq.dcs.queue.name}\")"

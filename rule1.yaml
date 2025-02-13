@@ -1,7 +1,0 @@
-- message: "code location"
-  ruleID: code-location
-  effort: 1
-  when:
-    or: 
-    - java.referenced:
-        pattern: 'org.springframework.amqp.*|*AmqpTemplate*|*AmqpTemplate.convertAndSend|*RabbitListener'
